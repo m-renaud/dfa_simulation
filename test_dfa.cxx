@@ -24,7 +24,9 @@ int main()
   d.start_state(0);
 
   while(std::cin >> line)
-    std::cout << std::boolalpha << d.simulate(line) << std::endl;
+    std::cout << std::boolalpha
+              << d.simulate(begin(line),end(line)) << std::endl
+    ;
 
 
   // Write the DFA as a dot file

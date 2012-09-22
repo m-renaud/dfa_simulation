@@ -38,13 +38,13 @@ struct dfa
       final_states.insert(state);
   }
 
-  template <typename Sequence>
-  bool simulate(Sequence&& seq)
+  template <typename Iter>
+  bool simulate(Iter begin, Iter end)
   {
     state_type state = start;
-    for(symbol_type const& c : seq)
+    for(; begin != end; ++begin)
     {
-      auto new_state = graph[state].find(c);
+      auto new_state = graph[state].find(*begin);
       if(new_state == graph[state].end())
         return false;
       state = new_state->second;
