@@ -34,18 +34,18 @@ struct dfa
   )
   {
     graph.insert(std::make_pair(state,transition));
-    if(is_final == dfa_state::final)
-      final_states.insert(state);
+    if (is_final == dfa_state::final)
+	    final_states.insert(state);
   }
 
   template <typename Iter>
   bool simulate(Iter begin, Iter end)
   {
     state_type state = start;
-    for(; begin != end; ++begin)
+    for (; begin != end; ++begin)
     {
       auto new_state = graph[state].find(*begin);
-      if(new_state == graph[state].end())
+      if (new_state == graph[state].end())
         return false;
       state = new_state->second;
     }
@@ -61,15 +61,17 @@ struct dfa
     ;
 
 
-    for(auto const& x : final_states)
+    for (auto const& x : final_states)
       os << x << " [shape=doublecircle];\n";
     os << "node [shape=circle]\n";
-    for(auto const& state : graph)
-      for(auto const& transition : state.second)
+
+    for (auto const& state : graph)
+      for (auto const& transition : state.second)
         os << state.first << " -> " << transition.second
            << " [label=\"" << transition.first << "\"];\n"
         ;
     os << "}\n";
+
     return os;
   }
 
